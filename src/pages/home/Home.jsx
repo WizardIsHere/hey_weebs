@@ -5,13 +5,14 @@ import Post from '../../components/Post/Post';
 
 
 import styles from './Home.module.css';
+import RightSidebar from '../../components/RightSidebar/RightSidebar';
 
 const Home = () => {
     return (
         <div className={styles.Home}>
             <Profile />
             <Post />
-            <div className='Rsidebar'>Right</div>
+            <RightSidebar />
         </div>
     )
 }
