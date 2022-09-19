@@ -3,7 +3,7 @@ import postPic2 from '../img/postpic2.jpg'
 import postPic3 from '../img/postpic3.jpg'
 
 
-export const PostsData = [
+export const FeedData = [
     {
         img: postPic1,
         name: 'Tzuyu',
