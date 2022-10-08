@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    /* position: fixed; */
 }
 .navicons{
     margin-top: 1rem;

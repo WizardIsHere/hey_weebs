@@ -1,0 +1,45 @@
+.Auth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 4rem;
+    position: relative;
+}
+.Auth>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo{
+    gap: 2rem;
+    
+}
+.logo>img{
+    width: 4rem;
+    height: 4rem;
+}
+.brand{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 3.2rem;
+    /* background-color: red;
+    
+    background-image: var(--buttonBg);
+    background-size: 100%;
+    background-repeat: repeat; */
+    color: #F2994A;  /* fallback for old browsers */
+    color: -webkit-linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);  /* Chrome 10-25, Safari 5.1-6 */
+    color: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /* --webkit-background-clip: text;
+    --webkit-text-fill-color: transparent;
+    --moz-background-clip: text;
+    --moz-text-fill-color: transparent; */
+
+}
+.brand>h6{
+    font-size: 0.85rem;
+
+}

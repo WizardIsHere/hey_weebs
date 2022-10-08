@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import styles from './Posts.module.css';
 import Heart from '../../img/like.png';
@@ -15,7 +15,7 @@ const Posts = ({data}) => {
                 <img src={Comment} alt="" />
                 <img src={Share} alt="" />
             </div>
-            <span>{data.likes}likes</span>
+            <span style={{ color: 'var(--gray)', fontSize: '12px' }}>{data.likes}likes</span>
             <div className={styles.details}>
                 <span><b>{data.name}</b></span>
                 <span> {data.desc}</span>
@@ -25,4 +25,4 @@ const Posts = ({data}) => {
     )
 }
 
-export default Posts
+export default Posts;
