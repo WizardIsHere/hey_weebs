@@ -1,12 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react';
 
-import styles from './Auth.module.css'
-import Logo from '../../img/logo.png'
+import {useDispatch, useSelector} from 'react-redux';
+import styles from './Auth.module.css';
+import Logo from '../../img/logo.png';
+import { logIn, signUp } from '../../actions/AuthActions';
 
 
 const Auth = () => {
+
+    const [isSignUp, setisSignUp] = useState(false);
+    const [data, setData] = useState({firstname: '', lastname: '',username: '', password: '', confirmpass: ''})
+    const [confirmPassword, setConfirmPassword] = useState(true)
+
+    const dispatch = useDispatch()
+    const loading = useSelector((state)=>state.authReducer.loading)
+    console.log(loading)
+
+    const handleChange = (event) => {
+        setData({...data,[event.target.name]: event.target.value})
+    }
+
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        if(isSignUp){
+            data.password === data.confirmpass ? dispatch(signUp(data)) : setConfirmPassword(false);
+        }
+        else{
+            dispatch(logIn (data))
+        }
+    }
+
+    const resetForm = () => {
+        setConfirmPassword(true);
+        setData({ firstname: '', lastname: '',username: '', password: '', confirmpass: '' })
+    }
+
     return (
         <div className={styles.Auth}>
+        {/* -------Left----------  */}
             <div className={styles.logo}>
                 <img src={Logo} alt="logo" />
             </div>
@@ -15,66 +46,46 @@ const Auth = () => {
                 <h6>Explore Animes and connect with other weebs</h6>
             </div>
 
-            <Login />
-            {/* <SignUp /> */}
-
-        </div>
-    )
-}
-
-function Login() {
-    return(
-        <div className={styles['a-right']}>
-            <form action="" className={`${styles.infoForm} ${styles.authForm}`}>
-                <h3>Login</h3>
+        {/* ---------Right----------*/}
+            <div className={styles['a-right']}>
+            <form action="" className={`${styles.infoForm} ${styles.authForm}`} onSubmit={handleSubmit}>
+                <h3>{isSignUp?"Sign Up": "Login"}</h3>
 
                 <div>
-                    <input type="text" placeholder='Username' className={styles.infoInput} name='username' />
+                    {isSignUp && (
+                        <div>
+                            <input type="text" placeholder='First Name' className={styles.infoInput} name='firstname' value={data.firstname} onChange={handleChange} />
+                            <input type="text" placeholder='Last Name' className={styles.infoInput} name='lastname' value={data.lastname} onChange={handleChange} />
+                        </div>
+                    )}
                 </div>
 
                 <div>
-                    <input type="password" placeholder='Password' className={styles.infoInput} name='password' />
+                    <input type="text" placeholder='Username' className={styles.infoInput} name='username'value={data.username} onChange={handleChange} />
                 </div>
 
                 <div>
-                    <span style={{ fontSize: 'small'}}>Don't have an account. Login</span>
+                    <input type="password" placeholder={isSignUp?'New Password':'Password'} className={styles.infoInput} value={data.password} name='password' onChange={handleChange} />
+                    {isSignUp && 
+                        <input type="password" placeholder='Confirm Password' className={styles.infoInput} name='confirmpass' value={data.confirmpass} onChange={handleChange} />
+                    }
                 </div>
-                <button className={styles.infoButton} type='submit'>Login</button>
+                    <span style={{display: confirmPassword?"none":"block", color:"red",fontSize:"12px",alignSelf:"flex-end",marginRight:"5px"}}>
+                        *Passwords doesn't match.
+                    </span>
+                <div>
+                    <span style={{ fontSize: 'small', cursor:'pointer'}} onClick={()=> {setisSignUp((prev)=>!prev); resetForm()}}>
+                        {isSignUp? "Already have an account. Login" : "Don't have an account? Sign Up"}
+                    </span>
+                </div>
+                <button className={styles.infoButton} type='submit' disabled={loading}>
+                    {loading ? "Loading..." : isSignUp? 'Sign Up' : 'Login'}
+                </button>
 
             </form>
         </div>
+    </div>
     )
 }
-
-function SignUp() {
-    return (
-        <div className={styles['a-right']}>
-            <form action="" className={`${styles.infoForm} ${styles.authForm}`}>
-                <h3>Sign Up</h3>
-
-                <div>
-                    <input type="text" placeholder='First Name' className={styles.infoInput} name='firstname' />
-                    <input type="text" placeholder='Last Name' className={styles.infoInput} name='lastname' />
-                </div>
-
-                <div>
-                    <input type="text" placeholder='Username' className={styles.infoInput} name='username' />
-                </div>
-
-                <div>
-                    <input type="text" placeholder='New Password' className={styles.infoInput} name='password' />
-                    <input type="text" placeholder='Confirm Password' className={styles.infoInput} name='cnfpassword' />
-                </div>
-
-                <div>
-                    <span style={{ fontSize: 'small'}}>Already have an account. Login</span>
-                </div>
-                <button className={styles.infoButton} type='submit'>Sign Up</button>
-
-            </form>
-        </div>
-    )
-}
-
 
 export default Auth
