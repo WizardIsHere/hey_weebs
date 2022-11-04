@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <div className={styles.Profile}>
         <LogoSearch/>
-        <ProfileCard />
+        <ProfileCard location='homepage'/>
         <FollowersCard />
     </div>
   )

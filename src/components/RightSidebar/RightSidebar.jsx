@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { Link } from 'react-router-dom';
 
 import styles from './RightSidebar.module.css';
 import Home from '../../img/home.png';
@@ -13,7 +14,7 @@ const RightSidebar = () => {
     return (
         <div className={styles.RightSidebar}> 
             <div className={styles.navicons}>
-                <img src={Home} alt="" />
+                <Link to={'../home'}><img src={Home} alt="" /></Link>
                 <UilSetting />
                 <img src={Notif} alt="" />
                 <img src={Comment} alt="" />
