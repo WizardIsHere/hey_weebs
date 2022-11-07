@@ -26,3 +26,7 @@ export const signUp = (formData) => async(dispatch) => {
         dispatch({type: "AUTH_ERROR",})
     }
 }
+
+export const logOut = ()=> async(dispatch) =>{
+    dispatch( {type: "LOGOUT"})
+}
